@@ -35,7 +35,7 @@ export const Certifications = () => {
       title: 'JavaScript (Basic)',
       organization: 'HackerRank',
       date: 'September 2024',
-      credentialUrl: 'https://www.hackerrank.com/certificates/364592421981l',
+      credentialUrl: 'https://www.hackerrank.com/certificates/364592421981',
       category: 'Development',
     },
     {
