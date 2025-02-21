@@ -6,6 +6,26 @@ import { Link } from "react-scroll";
 // const resumeUrl = "/public/Durga_CV.pdf";
 
 export const Hero = () => {
+  const handleDownloadResume = async () => {
+    try {
+      const response = await fetch("/Durga_CV.pdf");
+      if (!response.ok) throw new Error("File not found");
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Durga_CV.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+
   return (
     <section
       id="home"
@@ -50,14 +70,13 @@ export const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-              <a
-                href="/Durga_CV.pdf"
-                download
-                className="px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-xl"
+              <motion.button
+                onClick={handleDownloadResume}
+                className="px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-xl cursor-pointer active:scale-95 relative z-10"
               >
                 <Download className="w-5 h-5" />
                 Download Resume
-              </a>
+              </motion.button>
 
               <Link
                 to="contact"
